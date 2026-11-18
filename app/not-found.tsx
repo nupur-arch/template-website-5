@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <main className="not-found"><span>404 / OFF SIGNAL</span><h1>THIS STORY<br/>MOVED ON.</h1><p>The page may have changed, but the reporting continues.</p><Link href="/">Return to the front page ↗</Link></main>}

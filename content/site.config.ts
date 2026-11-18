@@ -1,0 +1,1 @@
+export const siteConfig = {name:"The Signal",shortName:"TS",defaultRoute:"/sports",language:"en",categories:["World","Culture","Science","Business","Sports"],leagues:[{id:"premier",name:"Premier League"},{id:"champions",name:"Champions League"},{id:"women",name:"Women’s Super League"}]} as const;

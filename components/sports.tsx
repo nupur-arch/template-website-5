@@ -1,0 +1,12 @@
+"use client";
+import Link from "next/link";
+import {useSearchParams} from "next/navigation";
+import {matches,players,standings,team,teams} from "@/lib/data";
+import {Crest} from "./logo";
+import {siteConfig} from "@/content/site.config";
+function Club({id}:{id:string}){const t=team(id)!;return <><Crest name={t.name} color={t.color}/><b>{t.name}</b></>}
+export function LeagueTabs(){const params=useSearchParams();const active=params.get("league")||"premier";return <div className="league-tabs" data-lenis-prevent>{siteConfig.leagues.map(l=><Link className={active===l.id?"active":""} href={`/sports?league=${l.id}`} key={l.id}>{l.name}</Link>)}</div>}
+export function MatchCard({id}:{id:string}){const m=matches.find(x=>x.id===id)!;return <Link href={`/sports/matches/${m.id}`} className="match-card"><div className="match-front"><span className={m.status==="Live"?"live":""}>{m.status}</span><div className="match-club"><Club id={m.homeId}/></div><strong>{m.homeScore??"–"}<i>:</i>{m.awayScore??"–"}</strong><div className="match-club away"><Club id={m.awayId}/></div></div><div className="match-back"><span>{new Intl.DateTimeFormat("en",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(new Date(m.date))}</span><b>{m.venue}</b><small>{m.scorer||"Match preview available"}</small></div></Link>}
+export function Standings(){return <div className="table-wrap" data-lenis-prevent><table><thead><tr><th>#</th><th>Team</th><th>P</th><th>J</th><th>W</th><th>D</th><th>L</th><th>GD</th></tr></thead><tbody>{standings.map((s,i)=>{const t=team(s.teamId)!;return <tr key={s.teamId}><td>{i+1}</td><td><Link href={`/sports/teams/${t.id}`}><Crest name={t.name} color={t.color}/><b>{t.name}</b></Link></td><td><strong>{s.points}</strong></td><td>{s.played}</td><td>{s.won}</td><td>{s.drawn}</td><td>{s.lost}</td><td>{s.gd>0?"+":""}{s.gd}</td></tr>})}</tbody></table></div>}
+export function Teams(){return <div className="teams-grid">{teams.map((t,i)=><Link href={`/sports/teams/${t.id}`} key={t.id}><span>0{i+1}</span><Crest name={t.name} color={t.color}/><h3>{t.name}</h3><b>View team ↗</b></Link>)}</div>}
+export function Scorers(){return <div className="scorers">{players.map((p,i)=>{const t=team(p.teamId)!;return <Link href={`/sports/players/${p.id}`} key={p.id}><b>{i+1}</b><div><h3>{p.name}</h3><span>{t.name}</span></div><i style={{"--bar":`${p.goals/20*100}%`} as React.CSSProperties}/><strong>{p.goals}</strong></Link>})}</div>}
