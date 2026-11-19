@@ -1,1 +1,1 @@
-import Link from "next/link";export default function NotFound(){return <main className="not-found"><span>404 / OFF SIGNAL</span><h1>THIS STORY<br/>MOVED ON.</h1><p>The page may have changed, but the reporting continues.</p><Link href="/">Return to the front page ↗</Link></main>}
+import Link from "next/link";export default function NotFound(){return <main className="not-found"><span>404 / FORA DA PISTA</span><h1>ESTA PÁGINA<br/>MUDOU DE RITMO.</h1><p>O endereço pode ter mudado, mas os guias continuam disponíveis.</p><Link href="/">Voltar ao início ↗</Link></main>}

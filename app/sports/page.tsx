@@ -1,6 +1,1 @@
-import {Suspense} from "react";
-import {Footer} from "@/components/footer-rebuild";
-import {LeagueTabs,MatchCard,Scorers,Standings,Teams} from "@/components/sports";
-import {matches} from "@/lib/data";
-export default function Sports(){return <main className="sports"><section className="sports-hero"><span className="eyebrow">THE SIGNAL / SPORTS</span><h1>THE BEAUTIFUL<br/><i>GAME, IN FULL.</i></h1><div className="season">Season 2026 <b>·</b> Times shown locally</div><Suspense><LeagueTabs/></Suspense></section><SportsSection n="01" title="Recent results"><div className="matches">{matches.filter(x=>x.status!=="Upcoming").map(x=><MatchCard id={x.id} key={x.id}/>)}</div></SportsSection><SportsSection n="02" title="Upcoming matches"><div className="matches">{matches.filter(x=>x.status==="Upcoming").map(x=><MatchCard id={x.id} key={x.id}/>)}</div></SportsSection><SportsSection n="03" title="Standings"><Standings/></SportsSection><SportsSection n="04" title="The clubs"><Teams/></SportsSection><SportsSection n="05" title="Top scorers"><Scorers/></SportsSection><Footer/></main>}
-function SportsSection({n,title,children}:{n:string;title:string;children:React.ReactNode}){return <section className="sports-section" id={title.toLowerCase().replaceAll(" ","-")}><div className="sports-title"><span>{n}</span><h2>{title}</h2></div>{children}</section>}
+import {redirect} from "next/navigation";export default function Sports(){redirect("/secoes/modalidades")}
